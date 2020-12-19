@@ -1,0 +1,17 @@
+{% extends "base.html" %} 
+{% block content %}
+<form method="POST" class="jumbotron">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <style>
+        body {
+        font-family: "Oswald", sans-serif;
+        font-size: 20px;
+        background-color: #98AFC7;
+        
+        color: black;
+    }  
+    </style>
+    <center><button type="submit" class="btn btn-success btn-lg">Submit</button></center>&nbsp;&nbsp;
+</form>
+{% endblock %} 
