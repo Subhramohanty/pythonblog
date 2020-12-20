@@ -21,9 +21,11 @@ from django.conf.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.PostList.as_view(), name='home'),
-    path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+    #path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
     path('accounts/',include ('django.contrib.auth.urls')),
     path('signup',views.signup,name='signup'),
     path('logout',views.logout_view,name='logout'),
-    path('blogpost',views.blogpost,name='blogpost')
+    path('blogpost',views.blogpost,name='blogpost'),
+    path('<slug:slug>/',views.post_detail,name='post_detail'),
+    path('category/<category>',views.CategoryView,name='category')
 ]

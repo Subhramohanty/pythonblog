@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -12,23 +12,32 @@ from .forms import *
 def blogpost(request):
     form=PostForm()
     if request.method == "POST":
-        form=PostForm(request.POST) 
-        # redirect(home)
-        return render(request,'blogpost.html',{'form':form})
+        form=PostForm(request.POST)
+        if form.is_valid():
+            blog_post=form.save(commit=False)
+            author=request.user
+            #author=User.objects.get(user = author_name)
+            print(author)
+            blog_post.author= author
+            blog_post.save()
+        return redirect('home')
+    return render(request,'blogpost.html',{'form':form})
 
 def logout_view(request):
     logout(request)
-    #return redirect(home)
+    return redirect('home')
 
 def signup(request):
     form =SignupForm()
     if request.method == "POST":
         form=SignupForm(request.POST)
-    if form.is_valid():
-        User=form.save()
-        user=form.save()
-        user.set_password(user.password)
-        user.save()
+        if form.is_valid():
+            User=form.save()
+            user=form.save()
+            user.set_password(user.password)
+            user.save()
+        return redirect('home')
+
     return render(request,'registration/signup.html',{'form':form})
 
 def post_detail(request, slug):
@@ -58,10 +67,14 @@ def post_detail(request, slug):
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
+def CategoryView(request,category):
+    post_list = Post.objects.filter(category=category)
+    return render (request,'index.html',{'post_list':post_list})
 
-class PostDetail(generic.DetailView):
+
+"""class PostDetail(generic.DetailView):
     model = Post
-    template_name = 'post_detail.html'
+    template_name = 'post_detail.html'"""
 
 
 

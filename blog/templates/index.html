@@ -32,10 +32,20 @@
 </header>
 <div class="container">
     <div class="row">
+            <div class="col-sm-4 mt-4">
+                    {% for post in post_list %} 
+                <div class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-text"><a href="{% url 'category' post.category  %}" >{{post.category}}</a></h2>
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
+    
         <!-- Blog Entries Column -->
-        <div class="col-md-12 mt-4 left">
+        <div class="col-sm-8 mt-4 left">
             {% for post in post_list %}
-            <div class="card mb-4" style="margin-left:700px; padding-left: 10px;">
+            <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ post.title }}</h2>
                     <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>

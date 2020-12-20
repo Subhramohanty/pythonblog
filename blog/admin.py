@@ -3,7 +3,7 @@ from .models import Post, Comment
 
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'status','created_on')
+    list_display = ('title', 'slug', 'status','created_on','category')
     list_filter = ("status",)
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
@@ -15,5 +15,6 @@ class CommentAdmin(admin.ModelAdmin):
     actions = ['approve_comments']
   
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment, CommentAdmin)
 def approve_comments(self, request, queryset):
         queryset.update(active=True)
