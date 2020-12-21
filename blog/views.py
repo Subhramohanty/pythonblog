@@ -32,7 +32,6 @@ def signup(request):
     if request.method == "POST":
         form=SignupForm(request.POST)
         if form.is_valid():
-            User=form.save()
             user=form.save()
             user.set_password(user.password)
             user.save()
@@ -70,8 +69,6 @@ class PostList(generic.ListView):
 def CategoryView(request,category):
     post_list = Post.objects.filter(category=category)
     return render (request,'index.html',{'post_list':post_list})
-
-
 """class PostDetail(generic.DetailView):
     model = Post
     template_name = 'post_detail.html'"""
