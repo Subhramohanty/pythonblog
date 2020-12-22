@@ -28,4 +28,5 @@ urlpatterns = [
     path('blogpost',views.blogpost,name='blogpost'),
     path('<slug:slug>/',views.post_detail,name='post_detail'),
     path('category/<category>',views.CategoryView,name='category')
+    
 ]

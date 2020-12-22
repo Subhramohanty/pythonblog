@@ -3,9 +3,20 @@
 <div class="container">
     <div class="row">
         <div class ="col">
-<form method="post" class="jumbotron">
+<form method="post" class="jumbotron" style="font-size: 20px;">
+    <center><label for="title" style="margin-left: 22px;">Title:</label>
+    <input type="text" id="title" name="title"></center><br>
+    <center><label>Content:</label>
+    <textarea id="content" name="content" rows="5" cols="25"></textarea></center><br>
+    <center><label for="category">Category:</label>
+    <select id="category" name="category">
+        <option value="News">News</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Job">Job</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Technology">Technology</option>
+    </select></center><br>
     {% csrf_token %}
-    <center> {{ form.as_p }}</center>
     <center><button type="submit" class="btn btn-success">Submit</button></center>
 </form>
 </div>

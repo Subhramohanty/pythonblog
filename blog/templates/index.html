@@ -1,5 +1,6 @@
 {% extends "base.html" %} 
 {% block content %}
+{% if is_paginated %}
 <style>
     body {
         font-family: "Roboto", sans-serif;
@@ -16,27 +17,25 @@
     }
 </style>
 
-<header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class=" col-sm-14 col-md-14 col-lg-14 mx-auto">
-                <div class="site-heading">
-                    <h1 class=" site-heading my-4 mt-3 text-white" style="font-family: Anton;"> Welcome to my awesome Blog </h1>
-                    <center><h4 class="text-light" style="font-family: Anton;">Create your own Creativity !!!
-                    </h4></center>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+    {% endif %}
+</ul>
+</div>
+{% endif %}
+
 <div class="container">
     <div class="row">
-            <div class="col-sm-4 mt-4" style="background-color: #B5C689;">
+            <div class="col-sm-4" style="background-color: #B5C689; margin-top: 42px;">
+                <a href="{%url 'blogpost' %}"><button type="submit" class="btn btn-primary btn-sm" style="margin-top: -65px; margin-left: -15px;">Add Category</button></a>
                     {% for post in post_list %}
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-text"><b><a href="{% url 'category' post.category  %}" >{{post.category}}</b></a></h5>
+                            <h6 class="card-text"><a href="{% url 'category' post.category  %}" >{{post.category}}</a></h6>
                         </div>
                     </div>
                 {% endfor %}
@@ -44,19 +43,23 @@
 
     
         <!-- Blog Entries Column -->
+        
         <div class="col-sm-8 mt-4 left">
-            <a href="{%url 'blogpost' %}"><button type="submit" class="btn btn-primary  btn-lg" style="margin-left: 600px;">Add post</button></a>
+            <a href="{%url 'blogpost' %}"><button type="submit" class="btn btn-primary" style="margin-left: 640px; margin-top: -30px;">Add post</button></a>
             {% for post in post_list %}
-            <div class="card mb-4">
-                <div class="card-body" style="background-color: #B5C689;">
-                    <h2 class="card-title">{{ post.title }}</h2>
-                    <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
-                    <p class="card-text">{{post.content|slice:":200" }}</p>
-                    <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary" style="margin-left:550px;">Read More &rarr;</a>
+                <div class="card mb-4" style="margin-top: -10px;">
+                    <div class="card-body" style="background-color: #B5C689;">
+                        <a href="{% url 'post_detail' post.slug  %}"><i class="fa fa-trash" aria-hidden="true" style="margin-left:650px;"></i></a>
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
+                        <p class="card-text">{{post.content|slice:":200" }}</p>
+                       
+                        <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary" style="margin-left:550px;">Read More &rarr;</a>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
 </div>
+
 {% endblock %} 
