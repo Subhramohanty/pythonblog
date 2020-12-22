@@ -42,7 +42,7 @@
             {% for post in post_list %}
                 <div class="card mb-4" style="margin-top: -10px;">
                     <div class="card-body" style="background-color: #B5C689;">
-                        <a href="{% url 'post_detail' post.slug  %}"><i class="fa fa-trash" aria-hidden="true" style="margin-left:650px;"></i></a>
+                        <a href="{% url 'delete' post.id  %}"><i class="fa fa-trash" aria-hidden="true" style="margin-left:650px;"></i></a>
                         <h2 class="card-title">{{ post.title }}</h2>
                         <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
                         <p class="card-text">{{post.content|slice:":200" }}</p>
