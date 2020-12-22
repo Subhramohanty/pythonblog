@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" >
+    {%csrf_token%}
+    <h4>Are you want to delete the post {{post.id}} ?</h4>
+    <input type="submit" class="btn btn-success" value="Yes">
+    <a href="{% url 'home' %}" class="btn btn-danger">No</a>
+</form>
+{% endblock %} 
