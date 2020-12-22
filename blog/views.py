@@ -73,6 +73,12 @@ def CategoryView(request,category):
 """class PostDetail(generic.DetailView):
     model = Post
     template_name = 'post_detail.html'"""
+def DeletePost(request,id):
+    if request.method == 'POST':
+        post = Post.objects.get(id = id)
+        post.delete()
+        return redirect('home')
+    return render(request,'delete.html')
 
 
 
