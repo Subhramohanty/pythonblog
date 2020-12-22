@@ -27,6 +27,7 @@ urlpatterns = [
     path('logout',views.logout_view,name='logout'),
     path('blogpost',views.blogpost,name='blogpost'),
     path('<slug:slug>/',views.post_detail,name='post_detail'),
-    path('category/<category>',views.CategoryView,name='category')
+    path('category/<category>',views.CategoryView,name='category'),
+    path('delete/<id>',views.DeletePost,name='delete')
     
 ]
