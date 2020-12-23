@@ -24,7 +24,13 @@
 <div class="container">
     <div class="row">
             <div class="col-sm-4" style="background-color: #B5C689; margin-top: 42px;">
-                <a href="{%url 'blogpost' %}"><button type="submit" class="btn btn-primary btn-sm" style="margin-top: -65px; margin-left: -15px;">Add Category</button></a>
+                <!-- <a href="{%url 'blogpost' %}"> -->
+                    <!-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" style="margin-top: -65px; margin-left: -15px;">Add Category</button> -->
+                <!-- </a> -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Add Category
+                  </button>
+                  <form>
                     {% for post in post_list %}
                     <div class="card">
                         <div class="card-body">
@@ -33,6 +39,28 @@
                     </div>
                 {% endfor %}
             </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Category</h5><br>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <label for="category">Category</label>
+                            <input type="category" class="form-control" id="category" aria-describedby="category" placeholder="Add your category">
+                        </form>
+                      
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        <!-- testing modal -->
 
     
         <!-- Blog Entries Column -->
@@ -52,7 +80,7 @@
                 </div>
             {% endfor %}
         </div>
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center" style="padding-left:550px;" >
     {% if page_obj.has_previous %}
     <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
     {% endif %}

@@ -30,4 +30,5 @@ urlpatterns = [
     path('category/<category>',views.CategoryView,name='category'),
     path('delete/<id>',views.DeletePost,name='delete')
     
+
 ]
